@@ -39,7 +39,6 @@ jobs:
       - name: my-artifact
         uses: actions/upload-artifact@v3
         with: 
-          name: ${{ env.artifactPath }}
           path: ${{ env.artifactPath }}
 
 #       - name: my-artifact
