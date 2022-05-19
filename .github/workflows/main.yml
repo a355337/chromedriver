@@ -5,6 +5,8 @@ name: CI
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
+  schedule:
+    - cron: '0 0 * * *'
   push:
     branches: [ main ]
   pull_request:
@@ -28,8 +30,8 @@ jobs:
         run: |
           version=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
           echo $version
-          echo "artifactPath=$version.zip" >> $GITHUB_ENV
-          wget "https://chromedriver.storage.googleapis.com/$version/chromedriver_win32.zip" -O "$version.zip"
+          echo "artifactPath=chromedriver$version.zip" >> $GITHUB_ENV
+          wget "https://chromedriver.storage.googleapis.com/$version/chromedriver_win32.zip" -O "chromedriver$version.zip"
 #          mkdir my_artifact
 #          wget https://chromedriver.storage.googleapis.com/102.0.5005.27/chromedriver_win32.zip -O ./my_artifact/102.zip
 #          wget "https://chromedriver.storage.googleapis.com/101.0.4951.41/chromedriver_win32.zip" -O "$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE).zip"
