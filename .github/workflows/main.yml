@@ -27,8 +27,8 @@ jobs:
       - name: donwload driver
         run: |
           mkdir my_artifact
-          wget https://chromedriver.storage.googleapis.com/102.0.5005.27/chromedriver_win32.zip .my_artifact/102.zip
-          wget https://chromedriver.storage.googleapis.com/101.0.4951.41/chromedriver_win32.zip .my_artifact/101.zip
+          wget https://chromedriver.storage.googleapis.com/102.0.5005.27/chromedriver_win32.zip -O .my_artifact/102.zip
+          wget https://chromedriver.storage.googleapis.com/101.0.4951.41/chromedriver_win32.zip -O .my_artifact/101.zip
           
           
       - name: my-artifact
