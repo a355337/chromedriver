@@ -28,8 +28,7 @@ jobs:
         run: |
           version=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
           echo $version
-          echo "$version.zip" > file.txt
-          echo "artifactPath=file.txt" >> $GITHUB_ENV
+          echo "artifactPath=$version.zip" >> $GITHUB_ENV
           wget "https://chromedriver.storage.googleapis.com/$version/chromedriver_win32.zip" -O "$version.zip"
 #          mkdir my_artifact
 #          wget https://chromedriver.storage.googleapis.com/102.0.5005.27/chromedriver_win32.zip -O ./my_artifact/102.zip
