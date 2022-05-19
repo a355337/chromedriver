@@ -42,8 +42,21 @@ jobs:
           echo "artifactPath1=chromedriver$version_1_detail.zip" >> $GITHUB_ENV
           wget "https://chromedriver.storage.googleapis.com/$version_1_detail/chromedriver_win32.zip" -O "chromedriver$version_1_detail.zip"
           
-#          wget https://chromedriver.storage.googleapis.com/102.0.5005.27/chromedriver_win32.zip -O ./my_artifact/102.zip
-#          wget "https://chromedriver.storage.googleapis.com/101.0.4951.41/chromedriver_win32.zip" -O "$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE).zip"
+          version_2=$(($version_big-2))
+          echo $version_2
+          version_2_detail=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$version_2)
+          echo $version_2_detail
+          echo "artifactPath2=chromedriver$version_2_detail.zip" >> $GITHUB_ENV
+          wget "https://chromedriver.storage.googleapis.com/$version_2_detail/chromedriver_win32.zip" -O "chromedriver$version_2_detail.zip"
+          
+          version_3=$(($version_big-3))
+          echo $version_3
+          version_3_detail=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$version_3)
+          echo $version_3_detail
+          echo "artifactPath3=chromedriver$version_3_detail.zip" >> $GITHUB_ENV
+          wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_3_detail.zip"
+
+
           
 #      - name: my-artifact
       - uses: actions/upload-artifact@v3
@@ -55,12 +68,17 @@ jobs:
         with: 
           name: ${{ env.artifactPath1 }}
           path: ${{ env.artifactPath1 }}
+          
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: ${{ env.artifactPath2 }}
+          path: ${{ env.artifactPath2 }}
+          
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: ${{ env.artifactPath3 }}
+          path: ${{ env.artifactPath3 }}
 
-#       - name: my-artifact
-#         uses: actions/upload-artifact@v3
-#         with: 
-#           name: chromedriver_win32.zip
-#           path: chromedriver_win32.zip
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
