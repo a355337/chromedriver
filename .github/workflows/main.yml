@@ -60,8 +60,24 @@ jobs:
           echo "artifactName3=Chrome Driver Win32 v$version_3_detail" >> $GITHUB_ENV
           wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_3_detail.zip"
 
-          wget https://msedgedriver.azureedge.net/101.0.1210.53/edgedriver_win32.zip
-          wget https://msedgedriver.azureedge.net/101.0.1210.53/edgedriver_win64.zip
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
+          version=`cat LATEST_CANARY`
+          
+          version_big=$(echo $version | grep -o -E '[0-9]+')
+          version_big=$(echo $version_big | grep -o -E '^[0-9]+')
+          echo $version_big
+          echo "artifactPath=chromedriver$version_1_detail.zip" >> $GITHUB_ENV
+          echo "artifactName=Chrome Driver Win32 v$version_1_detail" >> $GITHUB_ENV
+          wget "https://chromedriver.storage.googleapis.com/$version_1_detail/chromedriver_win32.zip" -O "chromedriver$version_1_detail.zip"
+          
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
+          version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]')
+          version_big=$(echo $version | grep -o -E '[0-9]+')
+          echo $version
+          echo $version_big
+          wget $(echo "https://msedgedriver.azureedge.net/$version/edgedriver_win64.zip"| tr -d '\r') -O "edgedriver_win64_v$version_big.zip"
+          echo "artifactEdgePath=edgedriver_win64_v$version_big.zip" >> $GITHUB_ENV
+          echo "artifactEdgeName=Edge Driver Win64 v$version" >> $GITHUB_ENV
           
 #      - name: my-artifact
       - uses: actions/upload-artifact@v3
@@ -86,13 +102,9 @@ jobs:
           
       - uses: actions/upload-artifact@v3
         with: 
-          name: Edge Driver Win 32 v101.0.1210.53
-          path: edgedriver_win32.zip
+          name: ${{ env.artifactEdgeName }}
+          path: ${{ env.artifactEdgePath }}
           
-      - uses: actions/upload-artifact@v3
-        with: 
-          name: Edge Driver Win 64 v101.0.1210.53 
-          path: edgedriver_win64.zip
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
