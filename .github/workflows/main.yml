@@ -72,11 +72,11 @@ jobs:
           
           curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
           version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]')
-          version_big=$(echo $version | grep -o -E '[0-9]+')
+          version_big=$(echo $version | grep -o -E '^[0-9]+')
           echo $version
           echo $version_big
-          wget $(echo "https://msedgedriver.azureedge.net/$version/edgedriver_win64.zip"| tr -d '\r') -O "edgedriver_win64_v$version_big.zip"
-          echo "artifactEdgePath=edgedriver_win64_v$version_big.zip" >> $GITHUB_ENV
+          wget $(echo "https://msedgedriver.azureedge.net/$version/edgedriver_win64.zip"| tr -d '\r') -O "edgedriver_win64_v$version.zip"
+          echo "artifactEdgePath=edgedriver_win64_v$version.zip" >> $GITHUB_ENV
           echo "artifactEdgeName=Edge Driver Win64 v$version" >> $GITHUB_ENV
           
 #      - name: my-artifact
