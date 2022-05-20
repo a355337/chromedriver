@@ -56,7 +56,8 @@ jobs:
           echo "artifactPath3=chromedriver$version_3_detail.zip" >> $GITHUB_ENV
           wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_3_detail.zip"
 
-
+          wget https://msedgedriver.azureedge.net/101.0.1210.53/edgedriver_win32.zip
+          wget https://msedgedriver.azureedge.net/101.0.1210.53/edgedriver_win64.zip
           
 #      - name: my-artifact
       - uses: actions/upload-artifact@v3
@@ -78,7 +79,16 @@ jobs:
         with: 
           name: ${{ env.artifactPath3 }}
           path: ${{ env.artifactPath3 }}
-
+          
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: win32 edgedriver 101.0.1210.53
+          path: edgedriver_win32.zip
+          
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: win64 edgedriver 101.0.1210.53
+          path: edgedriver_win64.zip
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
