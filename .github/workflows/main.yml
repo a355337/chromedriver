@@ -75,8 +75,8 @@ jobs:
           version_1_detail=$(echo `cat version.txt` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]')
           echo $version_1_detail
           wget $(echo "https://msedgedriver.azureedge.net/$version_1_detail/edgedriver_win64.zip"| tr -d '\r') -O "edgedriver_win64_v$version_1_detail.zip"
-          echo "artifactEdgePath=edgedriver_win64_v$version_1_detail.zip" >> $GITHUB_ENV
-          echo "artifactEdgeName=Edge Driver Win64 v$version_1_detail" >> $GITHUB_ENV
+          echo "artifactEdgePath1=edgedriver_win64_v$version_1_detail.zip" >> $GITHUB_ENV
+          echo "artifactEdgeName1=Edge Driver Win64 v$version_1_detail" >> $GITHUB_ENV
           
 #      - name: my-artifact
       - uses: actions/upload-artifact@v3
