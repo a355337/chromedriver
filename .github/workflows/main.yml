@@ -61,16 +61,6 @@ jobs:
           wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_3_detail.zip"
 
           curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
-          version=`cat LATEST_CANARY`
-          
-          version_big=$(echo $version | grep -o -E '[0-9]+')
-          version_big=$(echo $version_big | grep -o -E '^[0-9]+')
-          echo $version_big
-          echo "artifactPath=chromedriver$version_1_detail.zip" >> $GITHUB_ENV
-          echo "artifactName=Chrome Driver Win32 v$version_1_detail" >> $GITHUB_ENV
-          wget "https://chromedriver.storage.googleapis.com/$version_1_detail/chromedriver_win32.zip" -O "chromedriver$version_1_detail.zip"
-          
-          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
           version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]')
           version_big=$(echo $version | grep -o -E '^[0-9]+')
           echo $version
