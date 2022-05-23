@@ -71,7 +71,7 @@ jobs:
           
           version_1=$(($version_big-1))
           echo $version_1
-          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_RELEASE_$version_1_WINDOWS --output version.txt
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_RELEASE_$version_1_WINDOWS --output "version.txt"
           version_1_detail=$(echo `cat version.txt` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]')
           echo $version_1_detail
           
