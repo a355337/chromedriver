@@ -61,13 +61,13 @@ jobs:
           wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_3_detail.zip"
 
           curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
-          version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]')
+          version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]+')
           version_big=$(echo $version | grep -o -E '^[0-9]+')
           echo $version
           echo $version_big
-          wget $(echo "https://msedgedriver.azureedge.net/$version/edgedriver_win64.zip"| tr -d '\r') -O "edgedriver_win64_v$version.zip"
-          echo "artifactEdgePath=edgedriver_win64_v$version.zip" >> $GITHUB_ENV
-          echo "artifactEdgeName=Edge Driver Win64 v$version" >> $GITHUB_ENV
+          wget $(echo "https://msedgedriver.azureedge.net/${version}/edgedriver_win64.zip"| tr -d '\r') -O "edgedriver_win64_v${version}.zip"
+          echo "artifactEdgePath=edgedriver_win64_v${version}.zip" >> $GITHUB_ENV
+          echo "artifactEdgeName=Edge Driver Win64 v${version}" >> $GITHUB_ENV
           
           version_1=$(($version_big-1))
           echo $version_1
@@ -78,6 +78,33 @@ jobs:
           echo "artifactEdgePath1=edgedriver_win64_v${version_1_detail}.zip" >> $GITHUB_ENV
           echo "artifactEdgeName1=Edge Driver Win64 v${version_1_detail}" >> $GITHUB_ENV
           
+          
+          version_1=$(($version_big-1))
+          echo $version_1
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_RELEASE_${version_1}_WINDOWS --output "version.txt"
+          version_1_detail=$(echo `cat version.txt` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]+')
+          echo $version_1_detail
+          wget $(echo "https://msedgedriver.azureedge.net/${version_1_detail}/edgedriver_win64.zip") -O "edgedriver_win64_v${version_1_detail}.zip"
+          echo "artifactEdgePath1=edgedriver_win64_v${version_1_detail}.zip" >> $GITHUB_ENV
+          echo "artifactEdgeName1=Edge Driver Win64 v${version_1_detail}" >> $GITHUB_ENV
+          
+          version_2=$(($version_big-2))
+          echo $version_2
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_RELEASE_${version_2}_WINDOWS --output "version.txt"
+          version_2_detail=$(echo `cat version.txt` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]+')
+          echo $version_2_detail
+          wget $(echo "https://msedgedriver.azureedge.net/${version_2_detail}/edgedriver_win64.zip") -O "edgedriver_win64_v${version_2_detail}.zip"
+          echo "artifactEdgePath2=edgedriver_win64_v${version_2_detail}.zip" >> $GITHUB_ENV
+          echo "artifactEdgeName2=Edge Driver Win64 v${version_2_detail}" >> $GITHUB_ENV
+          
+          version_3=$(($version_big-3))
+          echo $version_3
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_RELEASE_${version_3}_WINDOWS --output "version.txt"
+          version_3_detail=$(echo `cat version.txt` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]+')
+          echo $version_3_detail
+          wget $(echo "https://msedgedriver.azureedge.net/${version_3_detail}/edgedriver_win64.zip") -O "edgedriver_win64_v${version_3_detail}.zip"
+          echo "artifactEdgePath3=edgedriver_win64_v${version_3_detail}.zip" >> $GITHUB_ENV
+          echo "artifactEdgeName3=Edge Driver Win64 v${version_3_detail}" >> $GITHUB_ENV
 #      - name: my-artifact
       - uses: actions/upload-artifact@v3
         with: 
@@ -109,6 +136,15 @@ jobs:
           name: ${{ env.artifactEdgeName1 }}
           path: ${{ env.artifactEdgePath1 }}
           
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: ${{ env.artifactEdgeName2 }}
+          path: ${{ env.artifactEdgePath2 }}      
+          
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: ${{ env.artifactEdgeName3 }}
+          path: ${{ env.artifactEdgePath3 }}  
           
       # Runs a single command using the runners shell
       - name: Run a one-line script
