@@ -66,8 +66,8 @@ jobs:
           echo $version_lastest_detail
           echo "artifactPathLastes=chromedriver$version_lastest_detail.zip" >> $GITHUB_ENV
           echo "artifactNameLastes=Chrome Driver Win32 v$version_lastest_detail" >> $GITHUB_ENV
-          wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_lastest_detail.zip"
-
+          wget "https://chromedriver.storage.googleapis.com/$version_lastest_detail/chromedriver_win32.zip" -O "chromedriver$version_lastest_detail.zip"
+         
           curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_STABLE --output LATEST_CANARY
           version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]+')
           version_big=$(echo $version | grep -o -E '^[0-9]+')
@@ -136,8 +136,8 @@ jobs:
           
       - uses: actions/upload-artifact@v3
         with: 
-          name: ${{ env.artifactPathLastes }}
-          path: ${{ env.artifactNameLastes }}
+          name: ${{ env.artifactNameLastes }}
+          path: ${{ env.artifactPathLastes }}
           
       - uses: actions/upload-artifact@v3
         with: 
