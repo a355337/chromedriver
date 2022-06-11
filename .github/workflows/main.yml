@@ -68,7 +68,7 @@ jobs:
           echo "artifactNameLastes=Chrome Driver Win32 v$version_lastest_detail" >> $GITHUB_ENV
           wget "https://chromedriver.storage.googleapis.com/$version_3_detail/chromedriver_win32.zip" -O "chromedriver$version_lastest_detail.zip"
 
-          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_CANARY --output LATEST_CANARY
+          curl https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/LATEST_STABLE --output LATEST_CANARY
           version=$(echo `cat LATEST_CANARY` | grep -Eo '[0-9]+.[0-9]+.[0-9]+.[0-9]+')
           version_big=$(echo $version | grep -o -E '^[0-9]+')
           echo $version
